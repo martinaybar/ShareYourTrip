@@ -40,7 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModels\City.cs" />
+    <Compile Include="DataModels\Country.cs" />
+    <Compile Include="DataModels\Destination.cs" />
+    <Compile Include="DataModels\State.cs" />
+    <Compile Include="DataModels\Trip.cs" />
+    <Compile Include="DataModels\TripService.cs" />
+    <Compile Include="DataModels\TripType.cs" />
     <Compile Include="DataModels\User.cs" />
+    <Compile Include="DataModels\UserPreference.cs" />
+    <Compile Include="DataModels\UserProfile.cs" />
+    <Compile Include="DataModels\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
