@@ -8,7 +8,7 @@ namespace ShareYourTrip.Entities.DataModels
 {
     public class Destination
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public virtual City City { get; set; }
         
         //TODO Evaluar si a la fecha desde y hasta la hacemos una clase nueva con algunos metodos

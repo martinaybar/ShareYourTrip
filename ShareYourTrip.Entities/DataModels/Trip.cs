@@ -8,7 +8,7 @@ namespace ShareYourTrip.Entities.DataModels
 {
     public class Trip
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string TripName { get; set; }
 
         //TODO donde estaria o como represento el CatalogoDeViajes

@@ -54,17 +54,17 @@ namespace ShareYourTrip.Data.Migrations
 
             context.TripServices.AddOrUpdate(
                 p => p.Name,
-                new TripService { Id = Guid.NewGuid(), Name = "Automovil" },
-                new TripService { Id = Guid.NewGuid(), Name = "Alojamiento" },
-                new TripService { Id = Guid.NewGuid(), Name = "Otros" });
+                new TripService { Name = "Automovil" },
+                new TripService { Name = "Alojamiento" },
+                new TripService { Name = "Otros" });
             context.SaveChanges();
 
 
             context.TripTypes.AddOrUpdate(
                 p => p.Name,
-                new TripType { Id = Guid.NewGuid(), Name = "Luna de miel" },
-                new TripType { Id = Guid.NewGuid(), Name = "Vacaciones" },
-                new TripType { Id = Guid.NewGuid(), Name = "Trabajo" });
+                new TripType { Name = "Luna de miel" },
+                new TripType { Name = "Vacaciones" },
+                new TripType { Name = "Trabajo" });
             context.SaveChanges();
 
 

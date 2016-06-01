@@ -7,13 +7,13 @@ namespace ShareYourTrip.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Add_UserRole : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_UserRole));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605312243105_Add_UserRole"; }
+            get { return "201606010052493_Initial"; }
         }
         
         string IMigrationMetadata.Source

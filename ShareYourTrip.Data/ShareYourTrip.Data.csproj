@@ -53,13 +53,9 @@
     <Compile Include="IRepositories\IRepository.cs" />
     <Compile Include="IRepositories\IUnitOfWork.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
-    <Compile Include="Migrations\201605312236326_Initial_First.cs" />
-    <Compile Include="Migrations\201605312236326_Initial_First.Designer.cs">
-      <DependentUpon>201605312236326_Initial_First.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605312243105_Add_UserRole.cs" />
-    <Compile Include="Migrations\201605312243105_Add_UserRole.Designer.cs">
-      <DependentUpon>201605312243105_Add_UserRole.cs</DependentUpon>
+    <Compile Include="Migrations\201606010052493_Initial.cs" />
+    <Compile Include="Migrations\201606010052493_Initial.Designer.cs">
+      <DependentUpon>201606010052493_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,11 +74,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605312236326_Initial_First.resx">
-      <DependentUpon>201605312236326_Initial_First.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605312243105_Add_UserRole.resx">
-      <DependentUpon>201605312243105_Add_UserRole.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606010052493_Initial.resx">
+      <DependentUpon>201606010052493_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

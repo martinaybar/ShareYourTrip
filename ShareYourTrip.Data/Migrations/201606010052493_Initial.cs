@@ -3,7 +3,7 @@ namespace ShareYourTrip.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial_First : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -44,11 +44,11 @@ namespace ShareYourTrip.Data.Migrations
                 "dbo.Destinations",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         FromDate = c.DateTime(nullable: false),
                         ToDate = c.DateTime(nullable: false),
                         City_Id = c.Int(),
-                        Trip_Id = c.Guid(),
+                        Trip_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cities", t => t.City_Id)
@@ -60,7 +60,7 @@ namespace ShareYourTrip.Data.Migrations
                 "dbo.Trips",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         TripName = c.String(),
                         User_Id = c.Int(),
                     })
@@ -72,7 +72,7 @@ namespace ShareYourTrip.Data.Migrations
                 "dbo.TripServices",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
                     })
@@ -82,7 +82,7 @@ namespace ShareYourTrip.Data.Migrations
                 "dbo.TripTypes",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
                     })
@@ -95,11 +95,15 @@ namespace ShareYourTrip.Data.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         UserName = c.String(),
                         Email = c.String(),
+                        GenderType = c.Int(nullable: false),
                         Profile_Id = c.Int(),
+                        Role_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.UserProfiles", t => t.Profile_Id)
-                .Index(t => t.Profile_Id);
+                .ForeignKey("dbo.UserRoles", t => t.Role_Id)
+                .Index(t => t.Profile_Id)
+                .Index(t => t.Role_Id);
             
             CreateTable(
                 "dbo.UserProfiles",
@@ -125,11 +129,21 @@ namespace ShareYourTrip.Data.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.UserRoles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.TripServiceTrips",
                 c => new
                     {
-                        TripService_Id = c.Guid(nullable: false),
-                        Trip_Id = c.Guid(nullable: false),
+                        TripService_Id = c.Int(nullable: false),
+                        Trip_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.TripService_Id, t.Trip_Id })
                 .ForeignKey("dbo.TripServices", t => t.TripService_Id, cascadeDelete: true)
@@ -141,8 +155,8 @@ namespace ShareYourTrip.Data.Migrations
                 "dbo.TripTypeTrips",
                 c => new
                     {
-                        TripType_Id = c.Guid(nullable: false),
-                        Trip_Id = c.Guid(nullable: false),
+                        TripType_Id = c.Int(nullable: false),
+                        Trip_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.TripType_Id, t.Trip_Id })
                 .ForeignKey("dbo.TripTypes", t => t.TripType_Id, cascadeDelete: true)
@@ -168,6 +182,7 @@ namespace ShareYourTrip.Data.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Trips", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.Users", "Role_Id", "dbo.UserRoles");
             DropForeignKey("dbo.Users", "Profile_Id", "dbo.UserProfiles");
             DropForeignKey("dbo.UserPreferenceUserProfiles", "UserProfile_Id", "dbo.UserProfiles");
             DropForeignKey("dbo.UserPreferenceUserProfiles", "UserPreference_Id", "dbo.UserPreferences");
@@ -187,6 +202,7 @@ namespace ShareYourTrip.Data.Migrations
             DropIndex("dbo.TripServiceTrips", new[] { "Trip_Id" });
             DropIndex("dbo.TripServiceTrips", new[] { "TripService_Id" });
             DropIndex("dbo.UserProfiles", new[] { "City_Id" });
+            DropIndex("dbo.Users", new[] { "Role_Id" });
             DropIndex("dbo.Users", new[] { "Profile_Id" });
             DropIndex("dbo.Trips", new[] { "User_Id" });
             DropIndex("dbo.Destinations", new[] { "Trip_Id" });
@@ -196,6 +212,7 @@ namespace ShareYourTrip.Data.Migrations
             DropTable("dbo.UserPreferenceUserProfiles");
             DropTable("dbo.TripTypeTrips");
             DropTable("dbo.TripServiceTrips");
+            DropTable("dbo.UserRoles");
             DropTable("dbo.UserPreferences");
             DropTable("dbo.UserProfiles");
             DropTable("dbo.Users");
