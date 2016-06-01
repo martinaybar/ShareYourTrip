@@ -83,6 +83,36 @@ namespace ShareYourTrip.Data.Migrations
                 new UserRole { Id = 3, Name = "Other" });
             context.SaveChanges();
 
+            context.Users.AddOrUpdate(
+                p => p.UserName,
+                new User
+                {
+                    Email = "admin@admin.com",
+                    UserName = "admin@admin.com",
+                    Password = "admin",
+                    GenderType = (int)GenderEnum.Male,
+                    Role = context.UserRoles.Find((int)UserRoleEnum.Admin),
+                    Profile = new UserProfile()
+                },
+                new User
+                {
+                    Email = "client1@webclient.com",
+                    UserName = "client1@webclient.com",
+                    Password = "client1",
+                    GenderType = (int)GenderEnum.Female,
+                    Role = context.UserRoles.Find((int)UserRoleEnum.WebClient),
+                    Profile = new UserProfile()
+                },
+                 new User
+                 {
+                     Email = "client2@webclient.com",
+                     UserName = "client2@webclient.com",
+                     Password = "client2",
+                     GenderType = (int)GenderEnum.Female,
+                     Role = context.UserRoles.Find((int)UserRoleEnum.WebClient),
+                     Profile = new UserProfile()
+                 });
+            context.SaveChanges();
 
         }
     }
