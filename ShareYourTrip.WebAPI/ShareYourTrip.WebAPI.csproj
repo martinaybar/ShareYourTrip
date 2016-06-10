@@ -235,6 +235,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -314,6 +315,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShareYourTrip.Business\ShareYourTrip.Business.csproj">
+      <Project>{3744c8b6-495e-4e12-9042-2f0428e12e0c}</Project>
+      <Name>ShareYourTrip.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShareYourTrip.Entities\ShareYourTrip.Entities.csproj">
+      <Project>{69702110-8cef-4df8-92aa-d82174422c57}</Project>
+      <Name>ShareYourTrip.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShareYourTrip.Business
 {
-    public class ShareYourTripService
+    public class ShareYourTripService : IShareYourTripService
     {
 
         private readonly IUnitOfWork uow;
