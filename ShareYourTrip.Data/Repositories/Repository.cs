@@ -13,15 +13,13 @@ namespace ShareYourTrip.Data.Repositories
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext Context;
-        
+        protected readonly DbSet DbSet;
 
         public Repository(DbContext context)
         {
-            Context = context;
+            this.Context = context;
+            this.DbSet = context.Set<TEntity>();
         }
-
-
-
 
         public void Add(TEntity entity)
         {
