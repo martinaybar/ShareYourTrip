@@ -14,6 +14,7 @@ namespace ShareYourTrip.Entities.DataModels
         //TODO Evaluar si a la fecha desde y hasta la hacemos una clase nueva con algunos metodos
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
+        public int DeltaDays { get; set; }
 
         public virtual Trip Trip { get; set; }
             
