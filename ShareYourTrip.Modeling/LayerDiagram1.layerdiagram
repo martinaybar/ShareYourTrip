@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="dac0845e-ea70-48f4-a35c-7bd0ed61c1a8" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="f353545c-3ae1-4fd2-a7a0-7e7e64265b5c" name="ShareYourTrip.Data.dll">
+      <references>
+        <reference Id="cf8f0708-fa79-4a9f-9ca3-b6f74ca613f9" name="ShareYourTrip.Data.dll">
+          <ArtifactNode Label="ShareYourTrip.Data.dll" Category="CodeSchema_Assembly" Id="(Assembly=../ShareYourTrip.Data/bin/Debug/ShareYourTrip.Data.dll)" />
+          <ExpandedNode Id="(Assembly=ShareYourTrip.Data)" Label="ShareYourTrip.Data.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="7e166516-6fb2-4005-887c-f350e19b6cd2" name="ShareYourTrip.Entities.dll">
+      <references>
+        <reference Id="0c576f1a-e3da-4287-bb54-848f10fdf9c6" name="ShareYourTrip.Entities.dll">
+          <ArtifactNode Label="ShareYourTrip.Entities.dll" Category="CodeSchema_Assembly" Id="(Assembly=../ShareYourTrip.Entities/bin/Debug/ShareYourTrip.Entities.dll)" />
+          <ExpandedNode Id="(Assembly=ShareYourTrip.Entities)" Label="ShareYourTrip.Entities.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="873e0e68-21a9-42d3-8c4b-723a393ba5b1" name="ShareYourTrip.Web.dll">
+      <references>
+        <reference Id="93444f3c-88a4-4141-800e-e6f215f4d080" name="ShareYourTrip.Web.dll">
+          <ArtifactNode Label="ShareYourTrip.Web.dll" Category="CodeSchema_Assembly" Id="(Assembly=../ShareYourTrip.Web/bin/ShareYourTrip.Web.dll)" />
+          <ExpandedNode Id="(Assembly=ShareYourTrip.Web)" Label="ShareYourTrip.Web.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>
