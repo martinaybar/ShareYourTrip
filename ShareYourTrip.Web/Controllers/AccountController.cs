@@ -10,10 +10,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ShareYourTrip.Web.Models;
 
-
+//Pruebaaa
 
 namespace ShareYourTrip.Web.Controllers
 {
+    
     [Authorize]
     public class AccountController : Controller
     {
