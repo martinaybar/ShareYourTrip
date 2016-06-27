@@ -14,4 +14,12 @@ namespace ShareYourTrip.Entities.DataModels
 
         public virtual ICollection<Trip> Trips { get; set; }
     }
+
+    public enum TripTypeEnum
+    {
+        Vacation,
+        Work,
+        HoneyMoon,
+        Business
+    }
 }
