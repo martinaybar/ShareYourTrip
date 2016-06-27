@@ -52,10 +52,9 @@
     <Compile Include="DataModels\UserProfile.cs" />
     <Compile Include="DataModels\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DestinationViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="DataModels\DataModelsClassDiagram.cd" />
   </ItemGroup>

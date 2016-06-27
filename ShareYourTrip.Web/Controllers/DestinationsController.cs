@@ -9,125 +9,38 @@ using System.Web;
 using System.Web.Mvc;
 using ShareYourTrip.Data.Context;
 using ShareYourTrip.Entities.DataModels;
-using ShareYourTrip.Entities.ViewModels;
 
 namespace ShareYourTrip.Web.Controllers
 {
-    public class TripsController : Controller
+    public class DestinationsController : Controller
     {
         private ShareYourTripContext db = new ShareYourTripContext();
 
-
-
-        // GET: Trips
+        // GET: Destinations
         public async Task<ActionResult> Index()
         {
-            return View(await db.Trips.ToListAsync());
+            return View(await db.Destinations.ToListAsync());
         }
 
-        // GET: Trips/Details/5
+        // GET: Destinations/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip trip = await db.Trips.FindAsync(id);
-            if (trip == null)
+            Destination destination = await db.Destinations.FindAsync(id);
+            if (destination == null)
             {
                 return HttpNotFound();
             }
-            return View(trip);
+            return View(destination);
         }
 
-        // GET: Trips/Create
+        // GET: Destinations/Create
         public ActionResult Create()
         {
             return View();
-        }
-
-        // POST: Trips/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,TripName")] Trip trip)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Trips.Add(trip);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(trip);
-        }
-
-        // GET: Trips/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Trip trip = await db.Trips.FindAsync(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trip);
-        }
-
-        // POST: Trips/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,TripName")] Trip trip)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(trip).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(trip);
-        }
-
-        // GET: Trips/Delete/5
-        public async Task<ActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Trip trip = await db.Trips.FindAsync(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trip);
-        }
-
-        // POST: Trips/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Trip trip = await db.Trips.FindAsync(id);
-            db.Trips.Remove(trip);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
-
-        #region Destination
-        
-        // GET: Destinations/Create
-        public ActionResult AddDestination()
-        {
-            ViewBag.Cities = new SelectList(db.Cities, "Id", "Name");
-            return PartialView("_AddDestination");
         }
 
         // POST: Destinations/Create
@@ -135,28 +48,74 @@ namespace ShareYourTrip.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddDestination(Destination destination)
+        public async Task<ActionResult> Create([Bind(Include = "Id,FromDate,ToDate,DeltaDays")] Destination destination)
         {
             if (ModelState.IsValid)
             {
-                List<Destination> destionationsList = (ViewBag.Destinations == null) ? new List<Destination>() : ViewBag.Destinations;
-
-               destionationsList.Add(destination);
-               ViewBag.Destinations = destionationsList;
-
-
-                //db.Destinations.Add(destination);
-                //await db.SaveChangesAsync();
-                return RedirectToAction("Create");
+                db.Destinations.Add(destination);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            
-            ViewBag.Cities = new SelectList(db.Cities, "Id", "Name", destination.City.Id);
-            return PartialView("_AddDestination", destination);
+
+            return View(destination);
         }
 
+        // GET: Destinations/Edit/5
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Destination destination = await db.Destinations.FindAsync(id);
+            if (destination == null)
+            {
+                return HttpNotFound();
+            }
+            return View(destination);
+        }
 
-        #endregion
+        // POST: Destinations/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FromDate,ToDate,DeltaDays")] Destination destination)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(destination).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(destination);
+        }
 
+        // GET: Destinations/Delete/5
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Destination destination = await db.Destinations.FindAsync(id);
+            if (destination == null)
+            {
+                return HttpNotFound();
+            }
+            return View(destination);
+        }
+
+        // POST: Destinations/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            Destination destination = await db.Destinations.FindAsync(id);
+            db.Destinations.Remove(destination);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {

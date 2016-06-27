@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DestinationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
@@ -270,6 +271,12 @@
     <Content Include="Views\Trips\Details.cshtml" />
     <Content Include="Views\Trips\Edit.cshtml" />
     <Content Include="Views\Trips\Index.cshtml" />
+    <Content Include="Views\Destinations\Create.cshtml" />
+    <Content Include="Views\Destinations\Delete.cshtml" />
+    <Content Include="Views\Destinations\Details.cshtml" />
+    <Content Include="Views\Destinations\Edit.cshtml" />
+    <Content Include="Views\Destinations\Index.cshtml" />
+    <Content Include="Views\Trips\_AddDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
