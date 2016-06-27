@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ShareYourTrip.Web.Models;
 
+
+
 namespace ShareYourTrip.Web.Controllers
 {
     [Authorize]
