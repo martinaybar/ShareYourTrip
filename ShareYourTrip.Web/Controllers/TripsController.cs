@@ -10,13 +10,14 @@ using System.Web.Mvc;
 using ShareYourTrip.Data.Context;
 using ShareYourTrip.Entities.DataModels;
 using ShareYourTrip.Entities.ViewModels;
+using ShareYourTrip.Web.Managers;
 
 namespace ShareYourTrip.Web.Controllers
 {
     public class TripsController : Controller
     {
         private ShareYourTripContext db = new ShareYourTripContext();
-
+        private TripManager tripManager;
 
 
         // GET: Trips
