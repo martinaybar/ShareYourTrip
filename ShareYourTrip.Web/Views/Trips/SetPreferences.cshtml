@@ -1,0 +1,64 @@
+﻿@model ShareYourTrip.Entities.ViewModels.TripPrefViewModel
+@{
+    ViewBag.Title = "SetPreferences";
+}
+
+<h2>Preferencias del Viaje</h2>
+
+
+<div class="form-horizontal">
+    @using (Html.BeginForm("SetPreferences", "Trips", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(model => model.TripName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TripName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TripName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <h3>Servicios</h3>
+
+
+        for (var i = 0; i < Model.Serv.Count; i++)
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.HiddenFor(m => m.Serv[i].Id)
+                    @Html.HiddenFor(m => m.Serv[i].Name)
+                 
+                        @Html.CheckBoxFor(m => m.Serv[i].IsSelected)
+                        @Html.DisplayFor(m => m.Serv[i].Id)
+                        @Html.DisplayFor(m => m.Serv[i].Name)
+                  
+                </div>
+            </div>
+        }
+
+        <h3>Tipo de Viaje</h3>
+        for (var i = 0; i < Model.Types.Count; i++)
+        {
+
+            <div class="form-group">
+                <div class="col-md-10">
+                   @Html.HiddenFor(m => m.Types[i].Id)
+                @Html.HiddenFor(m => m.Types[i].Name)
+            
+                    @Html.CheckBoxFor(m => m.Types[i].IsSelected)
+                    @Html.DisplayFor(m => m.Types[i].Id)
+                    @Html.DisplayFor(m => m.Types[i].Name)
+               
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    
+
+</div>

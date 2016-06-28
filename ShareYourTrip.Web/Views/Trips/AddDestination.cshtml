@@ -1,19 +1,19 @@
 ﻿@model ShareYourTrip.Entities.DataModels.Destination
 @using ShareYourTrip.Entities.DataModels
 
-@using (Html.BeginForm("AddDestination", "Trips", FormMethod.Post)) 
+@using (Html.BeginForm("AddDestination", "Trips", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Seleccione sus destinos</h4>
+
+   <div class="form-horizontal"> 
+        <h4>Seleccione su destinos</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.City.Id, ViewBag.Cities as IEnumerable<SelectListItem>, new {  @class = "form-control" })
+                @Html.DropDownListFor(model => model.City.Id, ViewBag.Cities as IEnumerable<SelectListItem>, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -87,6 +87,10 @@
 
     }
 }
+
+<div class="col-md-offset-2 col-md-10">
+    @Html.ActionLink("Next", "SetPreferences", null, new { @class = "btn btn-success" })
+</div>
 
 
 

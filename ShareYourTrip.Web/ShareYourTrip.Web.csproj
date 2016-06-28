@@ -277,6 +277,10 @@
     <Content Include="Views\Destinations\Edit.cshtml" />
     <Content Include="Views\Destinations\Index.cshtml" />
     <Content Include="Views\Trips\_AddDestination.cshtml" />
+    <Content Include="Views\Trips\AddDestination.cshtml" />
+    <Content Include="Views\Trips\SetPreferences.cshtml" />
+    <Content Include="Views\Trips\GetMatchUsers.cshtml" />
+    <Content Include="Views\Trips\TripDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

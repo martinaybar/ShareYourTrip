@@ -15,7 +15,7 @@ namespace ShareYourTrip.Entities.DataModels
 
         public virtual User User { get; set; }
 
-        public virtual ICollection<Destination> Destination { get; set; }
+        public virtual ICollection<Destination> Destinations { get; set; }
         public virtual ICollection<TripService> ServicesToShare { get; set; }
         public virtual ICollection<TripType> TripTypes { get; set; }
     }
