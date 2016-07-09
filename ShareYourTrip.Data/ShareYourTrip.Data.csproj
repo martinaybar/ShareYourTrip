@@ -53,17 +53,9 @@
     <Compile Include="IRepositories\IRepository.cs" />
     <Compile Include="IRepositories\IUnitOfWork.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
-    <Compile Include="Migrations\201606010052493_Initial.cs" />
-    <Compile Include="Migrations\201606010052493_Initial.Designer.cs">
-      <DependentUpon>201606010052493_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606010111246_Seed_Changes.cs" />
-    <Compile Include="Migrations\201606010111246_Seed_Changes.Designer.cs">
-      <DependentUpon>201606010111246_Seed_Changes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606270124439_second.cs" />
-    <Compile Include="Migrations\201606270124439_second.Designer.cs">
-      <DependentUpon>201606270124439_second.cs</DependentUpon>
+    <Compile Include="Migrations\201607090020394_initial-first.cs" />
+    <Compile Include="Migrations\201607090020394_initial-first.Designer.cs">
+      <DependentUpon>201607090020394_initial-first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,14 +74,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606010052493_Initial.resx">
-      <DependentUpon>201606010052493_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606010111246_Seed_Changes.resx">
-      <DependentUpon>201606010111246_Seed_Changes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606270124439_second.resx">
-      <DependentUpon>201606270124439_second.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607090020394_initial-first.resx">
+      <DependentUpon>201607090020394_initial-first.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

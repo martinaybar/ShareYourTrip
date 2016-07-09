@@ -9,8 +9,9 @@ namespace ShareYourTrip.Entities.DataModels
     public class UserProfile
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int Gender { get; set; }
+        public DateTime BirthDate { get; set; }
+
 
         //TODO evaluar si City lo ponemos en USER
         public virtual City City { get; set; }
@@ -18,4 +19,11 @@ namespace ShareYourTrip.Entities.DataModels
 
 
     }
+
+    public enum GenderEnum
+    {
+        Male,
+        Female
+    }
+
 }

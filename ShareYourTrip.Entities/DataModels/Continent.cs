@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace ShareYourTrip.Entities.DataModels
 {
-    public class Country
+    public class Continent
     {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
 
-        public virtual Continent Continent { get; set; }
+    public enum ContinentEnum
+    {
+        America = 1,
+        Europa,
+        Asia,
+        Africa,
+        Oceania,
+        Antartida
     }
 }

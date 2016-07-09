@@ -25,6 +25,8 @@ namespace ShareYourTrip.Data.Context
         public DbSet<UserPreference> UserPreferences { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Continent> Continents { get; set; }
+        public DbSet<TripClasification> TripClasifications { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

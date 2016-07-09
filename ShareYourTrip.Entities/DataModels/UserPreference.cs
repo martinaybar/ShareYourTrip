@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ShareYourTrip.Entities.DataModels
 {
 
+    /// <summary>
+    /// Intereses del usuario. Ej. deportes, viajes, e
+    /// </summary>
     public class UserPreference
     {
         public int Id { get; set; }
@@ -15,5 +14,16 @@ namespace ShareYourTrip.Entities.DataModels
 
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
 
+    }
+
+    public enum UserPreferenceEnum
+    {
+        Viajes = 1,
+        Negocios,
+        Deportes,
+        Tecnologia,
+        Historia,
+        Emprendimientos,
+        Ciencia
     }
 }

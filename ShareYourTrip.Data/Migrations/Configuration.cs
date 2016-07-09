@@ -13,7 +13,7 @@ namespace ShareYourTrip.Data.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ShareYourTrip.Data.Context.ShareYourTripContext context)
+        protected override void Seed(Context.ShareYourTripContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -27,10 +27,24 @@ namespace ShareYourTrip.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            
+            //Continents
+            foreach (string continent in Enum.GetNames(typeof(ContinentEnum)))
+            {
+                context.Continents.AddOrUpdate(
+                   p => p.Name,
+                   new Continent { Name = continent }
+                   );
+            }
+            context.SaveChanges();
 
+            //Countries
             context.Countries.AddOrUpdate(
                 p => p.Name,
-                new Country { Id = 1, Name = "Argentina" }
+                new Country { Id = 1, Name = "Argentina", Continent = context.Continents.Find((int)ContinentEnum.America) },
+                new Country { Id = 2, Name = "USA", Continent = context.Continents.Find((int)ContinentEnum.America) },
+                new Country { Id = 3, Name = "Holanda", Continent = context.Continents.Find((int)ContinentEnum.Europa) },
+                new Country { Id = 4, Name = "China", Continent = context.Continents.Find((int)ContinentEnum.Asia) }
                 );
             context.SaveChanges();
 
@@ -45,9 +59,9 @@ namespace ShareYourTrip.Data.Migrations
 
             context.Cities.AddOrUpdate(
               p => p.Name,
-              new City { Id = 1, Name = "Santa Fe", State = context.States.Where(u => u.Name == "Santa Fe").FirstOrDefault() },
-              new City { Id = 1, Name = "Rosario", State = context.States.Where(u => u.Name == "Santa Fe").FirstOrDefault() },
-              new City { Id = 2, Name = "Parana", State = context.States.Where(u => u.Name == "Entre Rios").FirstOrDefault() }
+              new City { Id = 1, Name = "Santa Fe", State = context.States.Find(1) },
+              new City { Id = 2, Name = "Rosario", State = context.States.Where(u => u.Name == "Santa Fe").FirstOrDefault() },
+              new City { Id = 3, Name = "Parana", State = context.States.Where(u => u.Name == "Entre Rios").FirstOrDefault() }
             );
             context.SaveChanges();
 
@@ -90,27 +104,24 @@ namespace ShareYourTrip.Data.Migrations
                     Email = "admin@admin.com",
                     UserName = "admin@admin.com",
                     Password = "admin",
-                    GenderType = (int)GenderEnum.Male,
                     Role = context.UserRoles.Find((int)UserRoleEnum.Admin),
-                    Profile = new UserProfile()
+                    UserProfile = new UserProfile { BirthDate = DateTime.Now, Gender = (int)GenderEnum.Male, City = context.Cities.FirstOrDefault() }
                 },
                 new User
                 {
                     Email = "client1@webclient.com",
                     UserName = "client1@webclient.com",
                     Password = "client1",
-                    GenderType = (int)GenderEnum.Female,
                     Role = context.UserRoles.Find((int)UserRoleEnum.WebClient),
-                    Profile = new UserProfile()
+                    UserProfile = new UserProfile { BirthDate = DateTime.Now, Gender = (int)GenderEnum.Female, City = context.Cities.FirstOrDefault() }
                 },
                  new User
                  {
                      Email = "client2@webclient.com",
                      UserName = "client2@webclient.com",
                      Password = "client2",
-                     GenderType = (int)GenderEnum.Female,
                      Role = context.UserRoles.Find((int)UserRoleEnum.WebClient),
-                     Profile = new UserProfile()
+                     UserProfile = new UserProfile { BirthDate = DateTime.Now, Gender = (int)GenderEnum.Female, City = context.Cities.FirstOrDefault() }
                  });
             context.SaveChanges();
 
