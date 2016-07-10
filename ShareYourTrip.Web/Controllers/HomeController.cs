@@ -15,7 +15,7 @@ namespace ShareYourTrip.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "ShareYourTrip es una plataforma tecnologica destinadas a personas que estan por realizar un viaje y desean compartir su experinecia y gastos con otros...";
 
             return View();
         }

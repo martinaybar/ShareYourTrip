@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShareYourTrip.Data.Repositories
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository : Repository<ApplicationUser>, IUserRepository
     {
 
         public UserRepository(ShareYourTripContext context)
@@ -21,8 +21,9 @@ namespace ShareYourTrip.Data.Repositories
 
         public bool UserExist(string userName)
         {
-            var user = ShareYourTripContext.Users.Where(u => u.UserName == userName).FirstOrDefault();
-            return (user == null) ? false : true;
+            //var user = ShareYourTripContext.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            //return (user == null) ? false : true;
+            return false;
         }
 
         public ShareYourTripContext ShareYourTripContext

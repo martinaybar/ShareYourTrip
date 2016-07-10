@@ -5,7 +5,7 @@
 {
     @Html.AntiForgeryToken()
 
-   <div class="form-horizontal"> 
+    <div class="form-horizontal">
         <h4>Seleccione su destinos</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -44,57 +44,62 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
+                <input type="submit" value="Agregar destino" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-@{
-    if (Session["Destinations"] != null)
-    {
-        var destinations = (List<Destination>)Session["Destinations"];
-
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.City.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FromDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ToDate)
-                </th>
-            </tr>
-
-            @foreach (var item in destinations)
+<div class="row">
+    <div class="col-xs-10">
+        @{
+            if (Session["Destinations"] != null)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FromDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ToDate)
-                    </td>
-                </tr>
+                var destinations = (List<Destination>)Session["Destinations"];
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            Destino
+                        </th>
+                        <th>
+                            Desde
+                        </th>
+                        <th>
+                            Hasta
+                        </th>
+                    </tr>
+
+                    @foreach (var item in destinations)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FromDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ToDate)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
             }
+        }
+    </div>
+</div>
 
-        </table>
 
-    }
-}
-
-<div class="col-md-offset-2 col-md-10">
-    @Html.ActionLink("Next", "SetPreferences", null, new { @class = "btn btn-success" })
+<div class="row">
+        @Html.ActionLink("Siguiente", "SetPreferences", null, new { @class = "btn btn-success" })
 </div>
 
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

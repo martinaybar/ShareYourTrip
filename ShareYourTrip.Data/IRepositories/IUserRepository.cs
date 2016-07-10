@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShareYourTrip.Data.IRepositories
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<ApplicationUser>
     {
         bool UserExist(string userName);
     }

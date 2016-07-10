@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ShareYourTrip.Entities.DataModels;
+using ShareYourTrip.Identity.Data.Context;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using ShareYourTrip.Data.Context;
-using ShareYourTrip.Entities.DataModels;
 
 namespace ShareYourTrip.Web.Controllers
 {
     public class DestinationsController : Controller
     {
-        private ShareYourTripContext db = new ShareYourTripContext();
+        private ShareYourTripIdentityContext db = new ShareYourTripIdentityContext();
 
         // GET: Destinations
         public async Task<ActionResult> Index()

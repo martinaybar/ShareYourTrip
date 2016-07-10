@@ -21,10 +21,10 @@ namespace ShareYourTrip.Data.Context
         public DbSet<Trip> Trips { get; set; }
         public DbSet<TripService> TripServices { get; set; }
         public DbSet<TripType> TripTypes { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<UserPreference> UserPreferences { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
+        //public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Continent> Continents { get; set; }
         public DbSet<TripClasification> TripClasifications { get; set; }
 

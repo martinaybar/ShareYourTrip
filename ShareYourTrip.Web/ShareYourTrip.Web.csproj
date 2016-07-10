@@ -203,7 +203,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Identity\IdentityUser.cs" />
     <Compile Include="Managers\TripManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -218,6 +217,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\jumbo-image.jpg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -269,20 +269,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Trips\Create.cshtml" />
-    <Content Include="Views\Trips\Delete.cshtml" />
-    <Content Include="Views\Trips\Details.cshtml" />
-    <Content Include="Views\Trips\Edit.cshtml" />
-    <Content Include="Views\Trips\Index.cshtml" />
     <Content Include="Views\Destinations\Create.cshtml" />
     <Content Include="Views\Destinations\Delete.cshtml" />
     <Content Include="Views\Destinations\Details.cshtml" />
     <Content Include="Views\Destinations\Edit.cshtml" />
     <Content Include="Views\Destinations\Index.cshtml" />
-    <Content Include="Views\Trips\_AddDestination.cshtml" />
     <Content Include="Views\Trips\AddDestination.cshtml" />
     <Content Include="Views\Trips\SetPreferences.cshtml" />
-    <Content Include="Views\Trips\GetMatchUsers.cshtml" />
     <Content Include="Views\Trips\TripDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -305,13 +298,13 @@
       <Project>{126bf12d-a924-46ad-bd68-3bf2a083e580}</Project>
       <Name>ShareYourTrip.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ShareYourTrip.Data\ShareYourTrip.Data.csproj">
-      <Project>{99154cc5-c8f5-4c18-bbc5-99af79ec4d01}</Project>
-      <Name>ShareYourTrip.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ShareYourTrip.Entities\ShareYourTrip.Entities.csproj">
       <Project>{69702110-8cef-4df8-92aa-d82174422c57}</Project>
       <Name>ShareYourTrip.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShareYourTrip.Identity.Data\ShareYourTrip.Identity.Data.csproj">
+      <Project>{829ddf46-5d40-4796-a11f-ee32b1ef4b71}</Project>
+      <Name>ShareYourTrip.Identity.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

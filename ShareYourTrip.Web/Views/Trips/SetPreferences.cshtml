@@ -18,47 +18,63 @@
             </div>
         </div>
 
-        <h3>Servicios</h3>
+        <div class="row">
+            
+           
 
 
-        for (var i = 0; i < Model.Serv.Count; i++)
-        {
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.HiddenFor(m => m.Serv[i].Id)
-                    @Html.HiddenFor(m => m.Serv[i].Name)
-                 
+            <div class="col-md-6">
+                <h3>Servicios</h3>
+                @Html.ValidationMessageFor(model => model.Serv, "", new { @class = "text-danger" })
+                @for (var i = 0; i < Model.Serv.Count; i++)
+                {
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(m => m.Serv[i].Id)
+                        @Html.HiddenFor(m => m.Serv[i].Name)
+
                         @Html.CheckBoxFor(m => m.Serv[i].IsSelected)
                         @Html.DisplayFor(m => m.Serv[i].Id)
                         @Html.DisplayFor(m => m.Serv[i].Name)
-                  
-                </div>
-            </div>
-        }
 
-        <h3>Tipo de Viaje</h3>
-        for (var i = 0; i < Model.Types.Count; i++)
-        {
+                    </div>
+                </div>
+                }
+            </div>
+            <div class="col-md-6">
+                <h3>Tipo de Viaje</h3>
+                @Html.ValidationMessageFor(model => model.Types, "", new { @class = "text-danger" })
+                @for (var i = 0; i < Model.Types.Count; i++)
+                {
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(m => m.Types[i].Id)
+                        @Html.HiddenFor(m => m.Types[i].Name)
+
+                        @Html.CheckBoxFor(m => m.Types[i].IsSelected)
+                        @Html.DisplayFor(m => m.Types[i].Id)
+                        @Html.DisplayFor(m => m.Types[i].Name)
+
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="text-danger">
+                @Html.ValidationSummary(true, "Errors: ")
+            </div>
+
+        </div>
+
+        
+
+
 
             <div class="form-group">
-                <div class="col-md-10">
-                   @Html.HiddenFor(m => m.Types[i].Id)
-                @Html.HiddenFor(m => m.Types[i].Name)
-            
-                    @Html.CheckBoxFor(m => m.Types[i].IsSelected)
-                    @Html.DisplayFor(m => m.Types[i].Id)
-                    @Html.DisplayFor(m => m.Types[i].Name)
-               
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Crear Viaje" class="btn btn-default" />
                 </div>
             </div>
-        }
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     }
-
-    
-
 </div>

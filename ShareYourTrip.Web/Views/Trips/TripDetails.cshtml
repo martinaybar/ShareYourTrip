@@ -1,33 +1,70 @@
-﻿@model ShareYourTrip.Entities.DataModels.Trip
+﻿@model ShareYourTrip.Entities.ViewModels.TripDetails
 @using ShareYourTrip.Entities.DataModels
 
 @{
-    ViewBag.Title = "TripDetails";
+    ViewBag.Title = "ShareYourTrip - TripDetails";
 }
 
-<h2>TripDetails</h2>
+<h2>Detalles del Viaje</h2>
 
-<div>
-    <h4>Trip</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TripName)
-        </dt>
+<div class="row">
+    <div class="col-md-12">
+        <h3>@Model.Trip.TripName</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Destino</td>
+                    <td>Desde</td>
+                    <td>Hasta</td>
+                </tr>
+            </thead>
 
-        <dd>
-            @Html.DisplayFor(model => model.TripName)
-        </dd>
-
-    </dl>
+            <tbody>
+                @foreach (Destination dest in Model.Trip.Destinations)
+                {
+                    <tr>
+                        <td>@dest.City.Name</td>
+                        <td>@dest.FromDate</td>
+                        <td>@dest.ToDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-<div>
-    @foreach(Destination dest in Model.Destinations)
-    {
-        <p>@dest.City.Name - @dest.FromDate - @dest.ToDate</p>
-    }
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Categorizacion</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Preferencias</th>
+                    <th>Genero</th>
+                    <th>Rango de Edad</th>
+                    <th>Trimestre</th>
+                    <th>Destinos</th>
+                    <th>Servicios</th>
+                    <th>Tipos</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>@Model.TripClasification.UserPreferences</th>
+                    <th>@Model.TripClasification.Genre</th>
+                    <th>@Model.TripClasification.UserAgeRange</th>
+                    <th>@Model.TripClasification.TripYearQuarter</th>
+                    <th>@Model.TripClasification.Destinations</th>
+                    <th>@Model.TripClasification.TripServicesToShare</th>
+                    <th>@Model.TripClasification.TripTypes</th>
+                    <th>@Model.TripClasification.CityFrom.Name</th>
+                    <th>@Model.TripClasification.ContinentTo.Name</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-@*<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@

@@ -1,7 +1,8 @@
-﻿using ShareYourTrip.Data.Context;
-using ShareYourTrip.Entities.DataModels;
+﻿using ShareYourTrip.Entities.DataModels;
+using ShareYourTrip.Identity.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -9,18 +10,26 @@ namespace ShareYourTrip.Web.Managers
 {
     public class TripManager
     {
-        private ShareYourTripContext db = new ShareYourTripContext();
+        private readonly ShareYourTripIdentityContext db;
 
 
-        public ICollection<Trip> GetSimilarsTrips(TripManager trip)
+        public TripManager(ShareYourTripIdentityContext context)
         {
-            //TODO Definir con que se realizaran los matches de viaje, crear catalogo, filtrarlo y devolverlo.
-            return db.Trips.ToList();
+            this.db = context;
         }
+        
 
-        public void SetTripClasification(Trip trip, User user)
+
+        //public ICollection<Trip> GetSimilarsTrips(TripManager trip)
+        //{
+        //    //TODO Definir con que se realizaran los matches de viaje, crear catalogo, filtrarlo y devolverlo.
+        //    return db.Trips.ToList();
+        //}
+
+        public TripClasification SetTripClasification(Trip trip)
         {
             TripClasification clasification = new TripClasification();
+            ApplicationUser user = trip.User;
 
             //USerInfo
             clasification.User = user;
@@ -31,27 +40,41 @@ namespace ShareYourTrip.Web.Managers
 
             //TripInfo
             clasification.Trip = trip;
-            clasification.ContinentTo = GetTripContinent(trip.Destinations.FirstOrDefault());
+            clasification.ContinentTo = GetTripContinent(trip.Destinations.FirstOrDefault().City.Id);
             clasification.TripYearQuarter = GetTripYearQuarter(trip.Destinations.FirstOrDefault());
             clasification.Destinations = GetTripDestinations(trip.Destinations);
             clasification.TripServicesToShare = GetTripServicesToShare(trip.ServicesToShare);
             clasification.TripTypes = GetTripTypes(trip.TripTypes);
+
+            return clasification;
         }
 
 
         #region private methods
 
 
-        private string GetUserPreferences(ICollection<UserPreference> preferences)
+        private string GetUserPreferences(ICollection<UserPreference> models)
         {
-            List<int> prefIds = new List<int>();
-
-            foreach (var pref in preferences)
+            string result = "";
+            foreach (var model in models)
             {
-                prefIds.Add(pref.Id);
+                if (model == models.First())
+                {
+                    result += "[";
+                }
+                result += model.Id;
+
+                if (model == models.Last())
+                {
+                    result += "]";
+                }
+                else
+                {
+                    result += ",";
+                }
             }
 
-            return prefIds.ToString();
+            return result;
         }
 
         /// <summary>
@@ -87,10 +110,11 @@ namespace ShareYourTrip.Web.Managers
             return age;
         }
 
-        private Continent GetTripContinent(Destination destination)
+        private Continent GetTripContinent(int cityId)
         {
-            Continent cont = destination.City.State.Country.Continent;
-            return cont;
+            var city = db.Cities.Include(c => c.State).Where(c => c.Id == cityId).FirstOrDefault();
+            Continent continent = city.State.Country.Continent;
+            return continent;
         }
 
         private int GetTripYearQuarter(Destination dest)
@@ -110,16 +134,28 @@ namespace ShareYourTrip.Web.Managers
             return 0;
         }
 
-        private string GetTripDestinations(IEnumerable<Destination> destinations)
+        private string GetTripDestinations(IEnumerable<Destination> models)
         {
-            List<int> destIds = new List<int>();
-
-            foreach(var dest in destinations)
+            string result = "";
+            foreach(var model in models)
             {
-                destIds.Add(dest.Id);
+                if(model == models.First())
+                {
+                    result += "[";
+                }
+                result += model.City.Id;
+
+                if(model == models.Last())
+                {
+                    result += "]";
+                }
+                else
+                {
+                    result += ",";
+                }
             }
 
-            return destIds.ToString();
+            return result;
         }
 
 
@@ -130,14 +166,26 @@ namespace ShareYourTrip.Web.Managers
         /// <returns></returns>
         private string GetTripServicesToShare(IEnumerable<TripService> models)
         {
-            List<int> idList = new List<int>();
-
-            foreach (var m in models)
+            string result = "";
+            foreach (var model in models)
             {
-                idList.Add(m.Id);
+                if (model == models.First())
+                {
+                    result += "[";
+                }
+                result += model.Id;
+
+                if (model == models.Last())
+                {
+                    result += "]";
+                }
+                else
+                {
+                    result += ",";
+                }
             }
 
-            return idList.ToString();
+            return result;
         }
 
 
@@ -148,14 +196,26 @@ namespace ShareYourTrip.Web.Managers
         /// <returns></returns>
         private string GetTripTypes(IEnumerable<TripType> models)
         {
-            List<int> idList = new List<int>();
-
-            foreach (var m in models)
+            string result = "";
+            foreach (var model in models)
             {
-                idList.Add(m.Id);
+                if (model == models.First())
+                {
+                    result += "[";
+                }
+                result += model.Id;
+
+                if (model == models.Last())
+                {
+                    result += "]";
+                }
+                else
+                {
+                    result += ",";
+                }
             }
 
-            return idList.ToString();
+            return result;
         }
 
         #endregion

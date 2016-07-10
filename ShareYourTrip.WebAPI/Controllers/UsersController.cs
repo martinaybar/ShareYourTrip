@@ -30,7 +30,7 @@ namespace ShareYourTrip.WebAPI.Controllers
         //}
 
         // GET: api/Users
-        public IQueryable<User> GetUsers()
+        public IQueryable<ApplicationUser> GetUsers()
         {
             ////return service.GetAllUsers();
             //List<User> users = new List<Entities.DataModels.User>();

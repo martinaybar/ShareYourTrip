@@ -9,6 +9,6 @@ namespace ShareYourTrip.Business
 {
     public interface IShareYourTripService
     {
-        IQueryable<User>GetAllUsers();
+        IQueryable<ApplicationUser> GetAllUsers();
     }
 }

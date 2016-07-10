@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ShareYourTrip.Web.Models;
+using ShareYourTrip.Entities.DataModels;
+using ShareYourTrip.Identity.Data.Context;
 
 namespace ShareYourTrip.Web
 {
@@ -42,7 +44,7 @@ namespace ShareYourTrip.Web
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new CustomUserStore(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new CustomUserStore(context.Get<ShareYourTripIdentityContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser, int>(manager)
             {

@@ -18,7 +18,7 @@ namespace ShareYourTrip.Business
             this.uow = UnitOfWork;
         }
 
-        public IQueryable<User> GetAllUsers()
+        public IQueryable<ApplicationUser> GetAllUsers()
         {
             return uow.Users.GetAll().AsQueryable();
         }

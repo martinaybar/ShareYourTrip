@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ShareYourTrip.Entities.Identity;
+using System.Collections.Generic;
 
 namespace ShareYourTrip.Entities.DataModels
 {
@@ -9,7 +10,7 @@ namespace ShareYourTrip.Entities.DataModels
 
         //TODO donde estaria o como represento el CatalogoDeViajes
 
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Destination> Destinations { get; set; }
         public virtual ICollection<TripService> ServicesToShare { get; set; }

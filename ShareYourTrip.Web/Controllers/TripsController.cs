@@ -7,120 +7,18 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ShareYourTrip.Data.Context;
 using ShareYourTrip.Entities.DataModels;
 using ShareYourTrip.Entities.ViewModels;
 using ShareYourTrip.Web.Managers;
+using ShareYourTrip.Identity.Data.Context;
+using Microsoft.AspNet.Identity;
 
 namespace ShareYourTrip.Web.Controllers
 {
+    [Authorize]
     public class TripsController : Controller
     {
-        private ShareYourTripContext db = new ShareYourTripContext();
-        private TripManager tripManager;
-
-
-        // GET: Trips
-        public async Task<ActionResult> Index()
-        {
-            return View(await db.Trips.ToListAsync());
-        }
-
-        // GET: Trips/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Trip trip = await db.Trips.FindAsync(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trip);
-        }
-
-        // GET: Trips/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Trips/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,TripName")] Trip trip)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Trips.Add(trip);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(trip);
-        }
-
-        // GET: Trips/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Trip trip = await db.Trips.FindAsync(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trip);
-        }
-
-        // POST: Trips/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,TripName")] Trip trip)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(trip).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(trip);
-        }
-
-        // GET: Trips/Delete/5
-        public async Task<ActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Trip trip = await db.Trips.FindAsync(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trip);
-        }
-
-        // POST: Trips/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Trip trip = await db.Trips.FindAsync(id);
-            db.Trips.Remove(trip);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
+        private ShareYourTripIdentityContext db = new ShareYourTripIdentityContext();
 
         #region Destination
 
@@ -130,20 +28,16 @@ namespace ShareYourTrip.Web.Controllers
             ViewBag.Cities = new SelectList(db.Cities, "Id", "Name");
             return View();
         }
-        
-        // POST: Destinations/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        // POST: Destinations/AddDestination
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddDestination(Destination destination)
         {
-            ViewBag.Cities = new SelectList(db.Cities, "Id", "Name", destination.City.Id);
-
             if (ModelState.IsValid)
             {
                 List<Destination> destionationsList = (Session["Destinations"] == null) ? new List<Destination>() : (List<Destination>) Session["Destinations"];
-                var city = db.Cities.Find(destination.City.Id);
+                var city = await db.Cities.FindAsync(destination.City.Id);
                 destination.City = city;
                 destionationsList.Add(destination);
                 Session["Destinations"] = destionationsList;
@@ -157,7 +51,7 @@ namespace ShareYourTrip.Web.Controllers
 
         #endregion
 
-        // GET: Destinations/Create
+        // GET: Destinations/SetPreferences
         public ActionResult SetPreferences()
         {
             if(Session["Destinations"] == null)
@@ -182,8 +76,7 @@ namespace ShareYourTrip.Web.Controllers
                 CustomCheckBox newType = new CustomCheckBox { Id = service.Id, Name = service.Name, IsSelected = false };
                 pref.Types.Add(newType);
             }
-
-
+            
             return View(pref);
         }
 
@@ -207,7 +100,13 @@ namespace ShareYourTrip.Web.Controllers
                         types.Add(newType);
                     }
                 }
+                if(types.Count == 0)
+                {
+                    ModelState.AddModelError(string.Empty,"Seleccione uno mas tipos de viaje");
+                    return View(pref);
+                }
                 trip.TripTypes = types;
+               
 
                 //Sevices
                 List<TripService> services = new List<TripService>();
@@ -219,19 +118,33 @@ namespace ShareYourTrip.Web.Controllers
                         services.Add(newType);
                     }
                 }
+                if (services.Count == 0)
+                {
+                    ModelState.AddModelError(string.Empty, "Seleccione uno mas servicios");
+                    return View(pref);
+                }
                 trip.ServicesToShare = services;
 
-                //User
-                //TODO Get loged User
-                trip.User = db.Users.FirstOrDefault();
+                //Get registered User
+                trip.User = db.Users.Find(User.Identity.GetUserId<int>());
 
                 db.Trips.Add(trip);
 
-                //return View();
-                return View("TripDetails", trip);
+
+                //Delete destionations from session
+                Session["Destinations"] = null;
+
+                //TripClasification
+                TripManager _tripManager = new TripManager(db);
+                TripClasification tripClasif = _tripManager.SetTripClasification(trip);
+                db.TripClasifications.Add(tripClasif);
+                db.SaveChanges();
+
+                TripDetails model = new TripDetails(trip, tripClasif);
+                return View("TripDetails", model);
             }
 
-            return View();
+            return View(pref);
 
         }
 
