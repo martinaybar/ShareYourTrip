@@ -1,4 +1,4 @@
-﻿@model ShareYourTrip.Entities.DataModels.Destination
+﻿@model ShareYourTrip.Entities.ViewModels.DestinationViewModel
 @using ShareYourTrip.Entities.DataModels
 
 @using (Html.BeginForm("AddDestination", "Trips", FormMethod.Post))
@@ -11,10 +11,10 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CityId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.City.Id, ViewBag.Cities as IEnumerable<SelectListItem>, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.CityId, ViewBag.Cities as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
             </div>
         </div>
 

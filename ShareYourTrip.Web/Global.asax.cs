@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using ShareYourTrip.Entities.DataModels;
+using ShareYourTrip.Entities.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +19,12 @@ namespace ShareYourTrip.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Mapper.Initialize(a =>
+            {
+                a.CreateMap<DestinationViewModel, Destination>();
+            });
+
         }
     }
 }

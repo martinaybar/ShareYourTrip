@@ -12,6 +12,7 @@ using ShareYourTrip.Entities.ViewModels;
 using ShareYourTrip.Web.Managers;
 using ShareYourTrip.Identity.Data.Context;
 using Microsoft.AspNet.Identity;
+using AutoMapper;
 
 namespace ShareYourTrip.Web.Controllers
 {
@@ -29,15 +30,37 @@ namespace ShareYourTrip.Web.Controllers
             return View();
         }
 
+        //// POST: Destinations/AddDestination
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> AddDestination(Destination destination)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        List<Destination> destionationsList = (Session["Destinations"] == null) ? new List<Destination>() : (List<Destination>) Session["Destinations"];
+        //        var city = await db.Cities.FindAsync(destination.City.Id);
+        //        destination.City = city;
+        //        destionationsList.Add(destination);
+        //        Session["Destinations"] = destionationsList;
+
+        //        return RedirectToAction("AddDestination");
+        //    }
+
+        //    ViewBag.Cities = new SelectList(db.Cities, "Id", "Name", destination.City.Id);
+        //    return View(destination);
+        //}
+
         // POST: Destinations/AddDestination
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddDestination(Destination destination)
+        public async Task<ActionResult> AddDestination(DestinationViewModel dest)
         {
             if (ModelState.IsValid)
             {
-                List<Destination> destionationsList = (Session["Destinations"] == null) ? new List<Destination>() : (List<Destination>) Session["Destinations"];
-                var city = await db.Cities.FindAsync(destination.City.Id);
+                Destination destination = Mapper.Map<DestinationViewModel, Destination>(dest);
+                List<Destination> destionationsList = (Session["Destinations"] == null) ? new List<Destination>() : (List<Destination>)Session["Destinations"];
+                var city = await db.Cities.FindAsync(dest.CityId);
                 destination.City = city;
                 destionationsList.Add(destination);
                 Session["Destinations"] = destionationsList;
@@ -45,8 +68,8 @@ namespace ShareYourTrip.Web.Controllers
                 return RedirectToAction("AddDestination");
             }
 
-            ViewBag.Cities = new SelectList(db.Cities, "Id", "Name", destination.City.Id);
-            return View(destination);
+            ViewBag.Cities = new SelectList(db.Cities, "Id", "Name", dest.CityId);
+            return View(dest);
         }
 
         #endregion
