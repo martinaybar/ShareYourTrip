@@ -26,6 +26,8 @@ namespace ShareYourTrip.Web.Controllers
         // GET: Destinations/Create
         public ActionResult AddDestination()
         {
+            CheckUserProfile();
+
             ViewBag.Cities = new SelectList(db.Cities, "Id", "Name");
             return View();
         }
@@ -70,6 +72,16 @@ namespace ShareYourTrip.Web.Controllers
 
             ViewBag.Cities = new SelectList(db.Cities, "Id", "Name", dest.CityId);
             return View(dest);
+        }
+
+        private void CheckUserProfile()
+        {
+            var user = db.Users.Find(User.Identity.GetUserId<int>());
+            if(user.UserProfile == null)
+            {
+                UserProfileManager _profManager = new UserProfileManager(db);
+                _profManager.CreateUserProfile(user);
+            }
         }
 
         #endregion

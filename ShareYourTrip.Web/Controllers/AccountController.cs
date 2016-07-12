@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ShareYourTrip.Web.Models;
 using ShareYourTrip.Entities.DataModels;
+using ShareYourTrip.Identity.Data.Context;
 
 //Pruebaaa
 
@@ -21,6 +22,8 @@ namespace ShareYourTrip.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        //private readonly ShareYourTripIdentityContext db = new ShareYourTripIdentityContext();
+
 
         public AccountController()
         {
@@ -155,7 +158,9 @@ namespace ShareYourTrip.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+               
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -175,6 +180,8 @@ namespace ShareYourTrip.Web.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+       
 
         //
         // GET: /Account/ConfirmEmail

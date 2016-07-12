@@ -11,12 +11,10 @@ namespace ShareYourTrip.Entities.ViewModels
     {
         [Required(ErrorMessage = "Requerido")]
         [Display(Name = "Fecha desde")]
-        [DataType(DataType.DateTime, ErrorMessage = "Ingrese una fecha valida")]
         public DateTime FromDate { get; set; }
 
         [Required(ErrorMessage = "Requerido")]
         [Display(Name = "Fecha hasta")]
-        [DataType(DataType.DateTime,ErrorMessage = "Ingrese una fecha valida")]
         public DateTime ToDate { get; set; }
 
         [Required(ErrorMessage = "Requerido")]
