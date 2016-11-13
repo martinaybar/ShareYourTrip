@@ -69,7 +69,7 @@
     <Compile Include="DataModels\User.cs" />
     <Compile Include="DataModels\UserPreference.cs" />
     <Compile Include="DataModels\UserProfile.cs" />
-    <Compile Include="DataModels\UserRole.cs" />
+    <Compile Include="Enums\UserRoleEnum.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
     <Compile Include="DataModels\ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

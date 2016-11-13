@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -10,20 +7,18 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ShareYourTrip.Web.Models;
 using ShareYourTrip.Entities.DataModels;
-using ShareYourTrip.Identity.Data.Context;
+using ShareYourTrip.Entities.Enums;
 
 //Pruebaaa
 
 namespace ShareYourTrip.Web.Controllers
 {
-    
+
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        //private readonly ShareYourTripIdentityContext db = new ShareYourTripIdentityContext();
-
 
         public AccountController()
         {
@@ -160,8 +155,12 @@ namespace ShareYourTrip.Web.Controllers
             {
 
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-               
+                
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
+                UserManager.AddToRole(user.Id, UserRoleEnum.Client.ToString());
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
