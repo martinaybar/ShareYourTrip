@@ -54,5 +54,9 @@ namespace ShareYourTrip.Identity.Data.Context
         {
             return new ShareYourTripIdentityContext();
         }
+
+        //public System.Data.Entity.DbSet<ShareYourTrip.Entities.Identity.CustomUserRole> CustomUserRoles { get; set; }
+
+        //public System.Data.Entity.DbSet<ShareYourTrip.Entities.Identity.CustomRole> CustomRoles { get; set; }
     }
 }
